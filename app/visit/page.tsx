@@ -1,0 +1,9 @@
+import { BookingAction } from "@/components/BookingAction";
+import { PageIntro } from "@/components/PageIntro";
+import { clinic, schedule } from "@/data/site";
+import { ScheduleStatus } from "@/components/ScheduleStatus";
+
+export const metadata = { title: "이용안내" };
+const dayLabels: Record<string, string> = { mon: "월요일", tue: "화요일", wed: "수요일", thu: "목요일", fri: "금요일", sat: "토요일", sun: "일요일" };
+
+export default function VisitPage() { return <><PageIntro eyebrow="PLAN YOUR VISIT" title="이용안내" description="진료 시간과 위치 등 방문에 필요한 정보를 확인해 주세요." /><section className="content-section shell"><div className="visit-facts"><div className="content-block"><p className="content-label">01 / LOCATION</p><h2>오시는 길</h2><p>{clinic.address ?? `${clinic.station} 인근 · 상세 주소는 확정 후 안내합니다.`}</p>{clinic.mapUrl && <a className="text-link" href={clinic.mapUrl} target="_blank" rel="noopener noreferrer">길찾기 ↗</a>}</div><div className="content-block"><p className="content-label">02 / HOURS</p><h2>진료 시간</h2>{schedule.weekly ? <><div className="schedule-list">{Object.entries(schedule.weekly).map(([day, hours]) => <div key={day}><strong>{dayLabels[day] ?? day}</strong><span>{hours.open}–{hours.close}{hours.breakStart && hours.breakEnd ? ` · 휴게 ${hours.breakStart}–${hours.breakEnd}` : ""}{hours.lastCheckIn ? ` · 접수 마감 ${hours.lastCheckIn}` : ""}</span></div>)}</div><ScheduleStatus schedule={schedule} /></> : <p>진료 시간과 휴진 일정은 확정 후 안내합니다.</p>}</div><div className="content-block"><p className="content-label">03 / BOOKING</p><h2>예약</h2><p>{clinic.bookingUrl ? "네이버 예약 페이지에서 방문 일정을 확인할 수 있습니다." : "네이버 예약을 사용할 예정입니다. 예약 주소가 확정되면 바로 연결하겠습니다."}</p><BookingAction compact /></div><div className="content-block"><p className="content-label">04 / CONTACT</p><h2>전화·주차</h2><p>{clinic.phone ? `전화 ${clinic.phone}` : "전화번호와 주차 안내는 확인 후 게시합니다."}</p></div></div></section></>; }
