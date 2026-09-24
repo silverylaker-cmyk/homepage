@@ -2,6 +2,8 @@
 
 신매역 인근 알지 이비인후과의 공개 전 홈페이지 시안입니다. Next.js App Router와 TypeScript로 만들었으며 정적 파일을 `out/`에 생성합니다. 머리·목 그림에서 귀·코·입·목을 고르면 관련 진료 안내를 볼 수 있습니다.
 
+미리보기: https://silverylaker-cmyk.github.io/homepage/
+
 ## 실행과 검증
 
 Node.js 22 이상을 권장합니다.
@@ -22,6 +24,8 @@ npx playwright test
 ```
 
 빌드 결과는 `out/`입니다. Playwright 테스트는 로컬 개발 서버를 자동으로 실행하고 360·390·768·1440px 화면, 인체 탐색, 모바일 메뉴, FAQ, 비급여 검색 등을 확인합니다. 테스트 스크린샷은 `artifacts/`에 생성되며 Git에는 포함하지 않습니다. 이미 설치된 브라우저를 쓰려면 `PLAYWRIGHT_CHROMIUM_EXECUTABLE` 환경변수에 실행 파일 경로를 지정할 수 있습니다.
+
+`main`에 푸시하면 GitHub Actions가 GitHub Pages용으로 정적 사이트를 빌드해 `/homepage/` 경로에 배포합니다. 로컬 빌드는 루트 경로를 쓰고, 배포 빌드에서는 `GITHUB_PAGES=true`로 경로를 설정합니다. 배포 결과는 저장소의 Actions 또는 Pages 화면에서 확인할 수 있습니다.
 
 ## 실제 정보 입력
 
